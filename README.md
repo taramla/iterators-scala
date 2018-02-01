@@ -20,6 +20,10 @@ An understanding of
 
 These really are the only required prerequisites.
 
+# Running the tests
+
+    $ sbt test
+
 # Running the sample applications
 
 During development:
