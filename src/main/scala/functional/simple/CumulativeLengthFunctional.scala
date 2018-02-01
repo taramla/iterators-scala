@@ -1,5 +1,6 @@
 package functional.simple
 
+/** Reads lines and prints cumulative length of all lines so far along with most recent line itself. */
 object CumulativeLengthFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines

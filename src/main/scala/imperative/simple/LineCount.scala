@@ -1,5 +1,6 @@
 package imperative.simple
 
+/** Reads lines and prints line count along with line itself. */
 object LineCountImperative extends App {
 
   var count = 0

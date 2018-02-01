@@ -1,5 +1,6 @@
 package functional.simple
 
+/** Reads lines and prints line count along with line itself. */
 object LineCountFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines

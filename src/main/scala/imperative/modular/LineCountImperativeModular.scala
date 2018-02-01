@@ -1,5 +1,9 @@
 package imperative.modular
 
+/**
+  * Provides main method for reading lines and printing line count along with line itself.
+  * Depends on suitable Input and Output provider traits.
+  */
 trait CountLines extends Input with Output[(Int, String)] {
 
   def main(args: Array[String]): Unit = {
@@ -11,4 +15,5 @@ trait CountLines extends Input with Output[(Int, String)] {
   }
 }
 
+/** Concrete main application object. */
 object LineCountImperativeModular extends InputFromStdIn with CountLines with OutputToStdOut[(Int, String)]
