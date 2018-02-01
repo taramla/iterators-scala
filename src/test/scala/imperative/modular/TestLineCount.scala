@@ -7,10 +7,7 @@ class TestLineCount extends WordSpec {
   "The LineCounter" when {
     "given an empty iterator" should {
       "produce an empty output" in {
-        trait InputFromEmptyIterator extends Input {
-          override val getInput = Iterator.empty
-        }
-        object SUT extends CountLines with OutputToBuffer[(Int, String)] with InputFromEmptyIterator
+        object SUT extends InputFromIterator() with CountLines with OutputToBuffer[(Int, String)]
         SUT.main(Array.empty)
         assert(SUT.getResults.isEmpty)
       }
@@ -18,13 +15,9 @@ class TestLineCount extends WordSpec {
 
     "given a nonempty iterator" should {
       "produce the correct nonempty output" in {
-        val data = Seq("hello", "world", "what", "up")
-        trait InputFromNonemptyIterator extends Input {
-          override val getInput = data.iterator
-        }
-        object SUT extends CountLines with OutputToBuffer[(Int, String)] with InputFromNonemptyIterator
+        object SUT extends InputFromIterator("hello", "world", "what", "up") with CountLines with OutputToBuffer[(Int, String)]
         SUT.main(Array.empty)
-        assert(SUT.getResults === (1 to data.length).zip(data))
+        assert(SUT.getResults === (1 to SUT.getData.length).zip(SUT.getData))
       }
     }
   }
