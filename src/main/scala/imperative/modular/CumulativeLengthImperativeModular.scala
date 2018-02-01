@@ -11,4 +11,4 @@ trait AccumulateLength extends Input with Output[(String, Int)] {
   }
 }
 
-object CumulativeLengthImperativeModular extends AccumulateLength with InputFromStdIn with OutputToStdOut[(String, Int)]
+object CumulativeLengthImperativeModular extends InputFromStdIn with AccumulateLength with OutputToStdOut[(String, Int)]
