@@ -28,8 +28,8 @@ During development:
 
 Or choose one of the following:
 
-    $ sbt 'run LineCount'
-    $ sbt 'run CumulativeLength'
+    $ sbt 'runMain LineCount'
+    $ sbt 'runMain CumulativeLength'
 
 During production, first create the startup scripts:
 
