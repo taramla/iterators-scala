@@ -1,6 +1,6 @@
 package imperative.simple
 
-object LineCount extends App {
+object LineCountImperative extends App {
 
   var count = 0
 

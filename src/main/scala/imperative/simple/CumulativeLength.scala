@@ -1,6 +1,6 @@
 package imperative.simple
 
-object CumulativeLength extends App {
+object CumulativeLengthImperative extends App {
 
   var length = 0
 
