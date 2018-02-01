@@ -11,4 +11,4 @@ trait CountLines extends Input with Output[(Int, String)] {
   }
 }
 
-object LineCount extends CountLines with InputFromStdIn with OutputToStdOut[(Int, String)]
+object LineCountImperativeModular extends CountLines with InputFromStdIn with OutputToStdOut[(Int, String)]

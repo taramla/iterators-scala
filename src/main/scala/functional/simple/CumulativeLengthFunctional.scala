@@ -1,6 +1,6 @@
 package functional.simple
 
-object CumulativeLength extends App {
+object CumulativeLengthFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines
 

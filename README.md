@@ -28,8 +28,9 @@ During development:
 
 Or choose one of the following:
 
-    $ sbt 'runMain LineCount'
-    $ sbt 'runMain CumulativeLength'
+    $ sbt 'runMain imperative.simple.LineCount'
+    $ sbt 'runMain imperative.modular.CumulativeLength'
+    ...
 
 During production, first create the startup scripts:
 
@@ -37,7 +38,7 @@ During production, first create the startup scripts:
 
 Then run the filters outside of sbt like this:
 
-    $ ./target/universal/stage/bin/line-count 
+    $ ./target/universal/stage/bin/line-count-imperative
     hello
     (1,hello)
     world
@@ -47,13 +48,13 @@ Then run the filters outside of sbt like this:
     up
     (4,up)
 
-    $ yes hello | head -n 4 | ./target/universal/stage/bin/line-count 
+    $ yes hello | head -n 4 | ./target/universal/stage/bin/line-count-imperative
     (1,hello)
     (2,hello)
     (3,hello)
     (4,hello)
 
-    $ ./target/universal/stage/bin/cumulative-length 
+    $ ./target/universal/stage/bin/cumulative-length-imperative
     hello
     (5,hello)
     world
@@ -63,7 +64,7 @@ Then run the filters outside of sbt like this:
     up
     (16,up)
 
-    $ yes hello | head -n 4 | ./target/universal/stage/bin/cumulative-length 
+    $ yes hello | head -n 4 | ./target/universal/stage/bin/cumulative-length-imperative
     (5,hello)
     (10,hello)
     (15,hello)

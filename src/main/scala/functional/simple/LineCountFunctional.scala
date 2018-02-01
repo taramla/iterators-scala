@@ -1,6 +1,6 @@
 package functional.simple
 
-object LineCount extends App {
+object LineCountFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines
 
