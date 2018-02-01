@@ -4,11 +4,14 @@ import org.scalatest.WordSpec
 
 class TestLineCount extends WordSpec {
 
+  def createSUT(items: String*) =
+    new InputFromIterator(items: _*) with CountLines with OutputToBuffer[(Int, String)]
+
   "The LineCounter" when {
     "given an empty iterator" should {
       "produce an empty output" in {
         // create SUT instance with empty input
-        object SUT extends InputFromIterator() with CountLines with OutputToBuffer[(Int, String)]
+        val SUT = createSUT()
         // exercise SUT
         SUT.main(Array.empty)
         // check effect on output observer
@@ -19,7 +22,7 @@ class TestLineCount extends WordSpec {
     "given a nonempty iterator" should {
       "produce the correct nonempty output" in {
         // create SUT instance with desired nonemtpy input
-        object SUT extends InputFromIterator("hello", "world", "what", "up") with CountLines with OutputToBuffer[(Int, String)]
+        val SUT = createSUT("hello", "world", "what", "up")
         // exercise SUT
         SUT.main(Array.empty)
         // check effect on output observer
