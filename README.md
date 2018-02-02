@@ -6,12 +6,13 @@ Examples of using Scala iterators to implement efficient Unix-style filters.
 
 An understanding of
 
-- stream processing
+- stream processing (finite vs. infinite/unbounded)
 - pipes and filters architecture
-- time/space complexity and scalability
 - separation of processing and I/O concerns
 - Iterator design pattern
 - immutability
+- time/space complexity and scalability
+- performance benchmarking
 
 # Prerequisites
 
@@ -21,6 +22,8 @@ An understanding of
 These really are the only required prerequisites.
 
 # Running the tests
+
+This will run the unit tests along with the performance benchmarks.
 
     $ sbt test
 
