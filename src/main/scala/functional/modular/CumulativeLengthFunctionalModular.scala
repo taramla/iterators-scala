@@ -4,13 +4,8 @@ package functional.modular
 object CumulativeLengthFunctionalModular extends Main[(String, Int)] {
 
   def run(lines: Iterator[String]): Iterator[(String, Int)] =
-    Iterator.iterate(Option(("dummy", 0))) {
-      case Some((_, n)) =>
-        if (lines.hasNext) {
-          val line = lines.next
-          Option((line, n + line.length))
-        } else {
-          None
-        }
-    } drop (1) takeWhile (x => x.isDefined) map (x => x.get)
+    lines.scanLeft(("dummy", 0)) {
+      case ((_, n), line) =>
+        (line, n + line.length)
+    }.drop(1)
 }
