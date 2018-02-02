@@ -5,9 +5,7 @@ object CumulativeLengthFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines
 
-  val results = Iterator.iterate {
-    Option(("dummy", 0))
-  } {
+  val results = Iterator.iterate(Option(("dummy", 0))) {
     case Some((_, n)) =>
       if (lines.hasNext) {
         val line = lines.next
@@ -15,7 +13,7 @@ object CumulativeLengthFunctional extends App {
       } else {
         None
       }
-  } drop (1) takeWhile (_.isDefined) map (_.get)
+  } drop (1) takeWhile (x => x.isDefined) map (x => x.get)
 
-  results foreach println
+  results.foreach { r => println(r) }
 }
