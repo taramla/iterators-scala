@@ -2,31 +2,45 @@ package imperative.modular
 
 import org.scalatest.WordSpec
 
+import scala.collection.mutable.Buffer
+
+/** Provider of an output observer that accumulates the results in a buffer one can inspect later. */
+trait OutputToBuffer[Result] extends Output[Result] {
+
+  private val buffer = Buffer.empty[Result]
+
+  def getResults: Seq[Result] = buffer.toSeq
+
+  override def doOutput(result: Result) = buffer += result
+}
+
 class TestLineCount extends WordSpec {
 
-  def createSUT(items: String*) =
-    new InputFromIterator(items: _*) with CountLines with OutputToBuffer[(Int, String)]
+  /** Creates a (mutable!) SUT instance. */
+  def createSUT() = new CountLines with OutputToBuffer[(Int, String)]
 
   "The LineCounter" when {
     "given an empty iterator" should {
       "produce an empty output" in {
-        // create SUT instance with empty input
-        val SUT = createSUT()
+        // create SUT instance for this test case
+        val sut = createSUT()
         // exercise SUT
-        SUT.main(Array.empty)
+        sut.run(Iterator.empty)
         // check effect on output observer
-        assert(SUT.getResults.isEmpty)
+        assert(sut.getResults.isEmpty)
       }
     }
 
     "given a nonempty iterator" should {
       "produce the correct nonempty output" in {
-        // create SUT instance with desired nonemtpy input
-        val SUT = createSUT("hello", "world", "what", "up")
+        // input data for this test case
+        val data = Seq("hello", "world", "what", "up")
+        // create SUT instance for this test case
+        val sut = createSUT()
         // exercise SUT
-        SUT.main(Array.empty)
+        sut.run(data.iterator)
         // check effect on output observer
-        assert(SUT.getResults === (1 to SUT.getData.length).zip(SUT.getData))
+        assert(sut.getResults === (1 to data.length).zip(data))
       }
     }
   }

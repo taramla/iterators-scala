@@ -1,20 +1,20 @@
 package imperative.modular
 
 /**
- * Provides main method for reading lines and printing
- * cumulative length of all lines so far along with most recent line itself.
- * Depends on suitable Input and Output provider traits.
+ * Provides a main method for reading lines and printing the cumulative length
+ * of all lines so far along with the most recent line itself.
+ * Depends on a suitable Output provider.
  */
-trait AccumulateLength extends Input with Output[(String, Int)] {
+trait AccumulateLength extends Task with Output[(String, Int)] {
 
-  def main(args: Array[String]): Unit = {
+  def run(input: Iterator[String]) = {
     var length = 0
-    for (line <- getInput) {
+    for (line <- input) {
       length += line.length
       doOutput((line, length))
     }
   }
 }
 
-/** Concrete main application object. */
-object CumulativeLengthImperativeModular extends InputFromStdIn with AccumulateLength with OutputToStdOut[(String, Int)]
+/** A concrete main application object. */
+object CumulativeLengthImperativeModular extends Main[(String, Int)] with AccumulateLength
