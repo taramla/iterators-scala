@@ -7,7 +7,7 @@ trait Output[Result] {
 
 /** Provides a reusable output observer tied to println/stdout. */
 trait OutputToStdOut[Result] extends Output[Result] {
-  override def doOutput(result: Result) = println(result)
+  override def doOutput(result: Result) = { println(result) }
 }
 
 /** Defines a dependency (plug-in contract) on a run method that processes an input stream. */
