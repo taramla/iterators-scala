@@ -14,12 +14,12 @@ trait OutputToBuffer[Result] extends Output[Result] {
   override def doOutput(result: Result) = { buffer += result }
 }
 
-class TestLineCount extends WordSpec {
+class TestLineCountImperative extends WordSpec {
 
   /** Creates a (mutable!) SUT instance. */
   def createSUT() = new CountLines with OutputToBuffer[(Int, String)]
 
-  "The LineCounter" when {
+  "An imperative LineCounter" when {
     "given an empty iterator" should {
       "produce an empty output" in {
         // create SUT instance for this test case
