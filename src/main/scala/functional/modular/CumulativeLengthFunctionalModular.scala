@@ -51,7 +51,7 @@ object CumulativeLengthFunctionalModular extends Main[(String, Int)] {
   def accumulateCount(acc: (String, Int), line: String) = (line, acc._2 + line.length)
 
   def run(lines: Iterator[String]): Iterator[(String, Int)] =
-    scanLeftUsingIterate(lines)("dummy", 0)(accumulateCount).drop(1)
+    scanLeftAsIterator(lines)("dummy", 0)(accumulateCount).drop(1)
 
   // the following fails when running interactively: delayed by one line
   // lines.scanLeft(("dummy", 0))(accumulateCount).drop(1)
