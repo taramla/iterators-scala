@@ -39,12 +39,10 @@ object CumulativeLengthFunctionalModular extends Main[(String, Int)] {
     }
 
     def next() =
-      if (initial) {
-        initial = false
-        z
-      } else if (hasNext) {
+      if (hasNext) {
         hdDefined = false
-        elem = op(elem, hd)
+        if (initial) initial = false
+        else elem = op(elem, hd)
         elem
       } else
         Iterator.empty.next()
