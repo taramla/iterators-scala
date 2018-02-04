@@ -55,4 +55,5 @@ object CumulativeLengthFunctionalModular extends Main[(String, Int)] {
 
   // the following fails when running interactively: delayed by one line
   // lines.scanLeft(("dummy", 0))(accumulateCount).drop(1)
+  // see https://github.com/scala/bug/issues/10709
 }
