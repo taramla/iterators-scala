@@ -7,7 +7,8 @@ scalaVersion := "2.12.4"
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 
 libraryDependencies ++= Seq(
-  "org.scalatest"     %% "scalatest"  % "3.0.1" % Test,
+  "org.scalatest"     %% "scalatest"  % "3.0.5" % Test,
+  "org.scalamock"     %% "scalamock"  % "4.0.0" % Test,
   "com.storm-enroute" %% "scalameter" % "0.9"   % Test
 )
 
