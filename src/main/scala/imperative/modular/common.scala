@@ -2,12 +2,12 @@ package imperative.modular
 
 /** Defines a dependency (plug-in contract) on an output method (Observer). */
 trait Output[Result] {
-  def doOutput(result: Result)
+  def doOutput(result: Result): Unit
 }
 
 /** Provides a reusable output observer tied to println/stdout. */
 trait OutputToStdOut[Result] extends Output[Result] {
-  override def doOutput(result: Result) = { println(result) }
+  override def doOutput(result: Result) = println(result)
 }
 
 /** Defines a dependency (plug-in contract) on a run method that processes an input stream. */
