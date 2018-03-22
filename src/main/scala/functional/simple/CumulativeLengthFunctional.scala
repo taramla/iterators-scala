@@ -5,15 +5,10 @@ object CumulativeLengthFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines
 
-  val results = Iterator.iterate(Option(("dummy", 0))) {
-    case Some((_, n)) =>
-      if (lines.hasNext) {
-        val line = lines.next
-        Option((line, n + line.length))
-      } else {
-        None
-      }
-  } drop (1) takeWhile (x => x.isDefined) map (x => x.get)
+  def accumulateCount(acc: (String, Int), line: String): (String, Int) =
+    (line, acc._2 + line.length)
+
+  val results = lines.scanLeft("dummy", 0)(accumulateCount).drop(1)
 
   results.foreach { r => println(r) }
 }
