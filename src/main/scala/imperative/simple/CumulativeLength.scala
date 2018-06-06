@@ -4,9 +4,12 @@ package imperative.simple
 object CumulativeLengthImperative extends App {
 
   var length = 0
+  println(length)
 
-  for (line <- scala.io.Source.stdin.getLines) {
+  var line = scala.io.StdIn.readLine()
+  while (line != null) {
     length += line.length
-    println((line, length))
+    println(length)
+    line = scala.io.StdIn.readLine()
   }
 }
