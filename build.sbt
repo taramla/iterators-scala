@@ -2,7 +2,7 @@ name := "iterators-scala"
 
 version := "0.3"
 
-scalaVersion := "2.12.5"
+scalaVersion := "2.12.6"
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 
