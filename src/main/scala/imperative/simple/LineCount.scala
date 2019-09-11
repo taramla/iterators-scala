@@ -4,7 +4,8 @@ package imperative.simple
 object LineCountImperative extends App {
 
   import sun.misc.Signal
-  Signal.handle(new Signal("PIPE"), _ => scala.sys.exit())
+  if (System.getProperty("os.name") != "Windows")
+    Signal.handle(new Signal("PIPE"), _ => scala.sys.exit())
 
   var count = 0
 
