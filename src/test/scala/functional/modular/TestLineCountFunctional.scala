@@ -27,5 +27,22 @@ class TestLineCountFunctional extends WordSpec {
         assert(result.toSeq === (1 to data.length).zip(data))
       }
     }
+
+    "given a nonempty iterator" should {
+      "exhibit the correct interactive behavior" in {
+        // input data for this test case
+        val input = Iterator("hello", "world", "what", "up")
+        // exercise SUT
+        val trace = Tracing.runWithTracing(sut.run)(input)
+        // check correctness of resulting interactions
+        def i = InputEvent
+        def o = OutputEvent
+        assert(trace === Seq(
+          i("hello"), o((1, "hello")),
+          i("world"), o((2, "world")),
+          i("what"), o((3, "what")),
+          i("up"), o((4, "up"))))
+      }
+    }
   }
 }

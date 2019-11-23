@@ -6,9 +6,9 @@ package functional
  */
 package object modular {
 
-  type Task[Result] = Iterator[String] => Iterator[Result]
+  type Task[-Input, +Result] = Iterator[Input] => Iterator[Result]
 
-  def runWithStdIO[Result](run: Task[Result]): Unit = {
+  def runWithStdIO[Result](run: Task[String, Result]): Unit = {
     val lines = scala.io.Source.stdin.getLines
     val result = run(lines)
     result.foreach(println)
