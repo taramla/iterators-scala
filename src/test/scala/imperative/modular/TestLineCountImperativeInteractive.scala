@@ -10,18 +10,15 @@ class TestLineCountImperativeInteractive extends WordSpec {
       val input = Iterator("hello", "world", "what", "up")
       // create SUT instance for this test case
       val sut = new CountLines with Tracing[String, (Int, String)]
-      // instrument input with tracing
-      val tracedInput = sut.traced(input)
       // exercise SUT
-      sut.run(tracedInput)
+      sut.run(input)
       // check correctness of resulting interactions
-      import sut.{InputEvent => i, OutputEvent => o}
+      import sut.{ InputEvent => i, OutputEvent => o }
       assert(sut.trace === Seq(
         i("hello"), o((1, "hello")),
         i("world"), o((2, "world")),
-        i("what"),  o((3, "what")),
-        i("up"),    o((4, "up"))
-      ))
+        i("what"), o((3, "what")),
+        i("up"), o((4, "up"))))
     }
   }
 }

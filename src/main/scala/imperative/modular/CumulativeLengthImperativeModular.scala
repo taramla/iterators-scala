@@ -5,7 +5,7 @@ package imperative.modular
  * of all lines so far along with the most recent line itself.
  * Depends on a suitable Output provider.
  */
-trait AccumulateLength extends Task with Output[(String, Int)] {
+trait AccumulateLength extends Task[String] with Output[(String, Int)] {
 
   def run(input: Iterator[String]) = {
     var length = 0
