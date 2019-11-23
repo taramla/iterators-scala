@@ -3,11 +3,12 @@ package functional.modular
 import scala.collection.mutable.Buffer
 
 /** A mini-framework for trace-based testing of interactive behavior. */
-sealed trait TraceEvent[Input, Result]
-case class InputEvent[Input, Result](value: Input) extends TraceEvent[Input, Result]
-case class OutputEvent[Input, Result](value: Result) extends TraceEvent[Input, Result]
-
 object Tracing {
+
+  sealed trait TraceEvent[Input, Result]
+  case class InputEvent[Input, Result](value: Input) extends TraceEvent[Input, Result]
+  case class OutputEvent[Input, Result](value: Result) extends TraceEvent[Input, Result]
+
   /**
    * Invokes the original run method on the instrumented input,
    * instruments the output, and returns the trace.

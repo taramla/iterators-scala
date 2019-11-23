@@ -35,8 +35,7 @@ class TestLineCountFunctional extends WordSpec {
         // exercise SUT
         val trace = Tracing.runWithTracing(sut.run)(input)
         // check correctness of resulting interactions
-        def i = InputEvent
-        def o = OutputEvent
+        import Tracing.{ InputEvent => i, OutputEvent => o }
         assert(trace === Seq(
           i("hello"), o((1, "hello")),
           i("world"), o((2, "world")),
