@@ -21,7 +21,7 @@ class TestCumulativeLengthFunctional extends WordSpec {
       "produce the correct nonempty output" in {
         // input data for this test case
         val data = Seq("hello", "world", "what", "up")
-        val expected = data.scanLeft(("dummy", 0)) { case ((_, n), l) => (l, n + l.length) }.drop(1)
+        val expected = data.zip(Seq(5, 10, 14, 16))
         // exercise SUT
         val actual: Iterator[(String, Int)] = sut.run(data.iterator)
         // check effect on output observer
