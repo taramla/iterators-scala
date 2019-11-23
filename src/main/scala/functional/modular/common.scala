@@ -1,16 +1,14 @@
-package functional.modular
-
-/** Defines a dependency (plug-in contract) on a run method that processes an input stream. */
-trait Task[Result] {
-  def run(input: Iterator[String]): Iterator[Result]
-}
+package functional
 
 /**
- * Provides a reusable main task tied to stdin and stdout.
- * Depends on a suitable run method.
+ * Provides a reusable method for invoking a task with stdin and stdout.
+ * Depends on a suitable task (run method) that transforms an input stream to an output stream.
  */
-trait Main[Result] extends Task[Result] {
-  def main(args: Array[String]): Unit = {
+package object modular {
+
+  type Task[Result] = Iterator[String] => Iterator[Result]
+
+  def runWithStdIO[Result](run: Task[Result]): Unit = {
     val lines = scala.io.Source.stdin.getLines
     val result = run(lines)
     result.foreach(println)
