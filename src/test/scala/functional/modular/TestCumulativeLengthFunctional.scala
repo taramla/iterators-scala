@@ -1,8 +1,8 @@
 package functional.modular
 
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
-class TestCumulativeLengthFunctional extends WordSpec {
+class TestCumulativeLengthFunctional extends AnyWordSpec {
 
   /** Refers to the existing immutable SUT instance. */
   val sut = CumulativeLengthFunctionalModular

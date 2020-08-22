@@ -17,6 +17,6 @@ object Tracing {
     val trace = Buffer.empty[TraceEvent[Input, Result]]
     val tracedInput = input.map { s => trace.append(InputEvent(s)); s }
     run(tracedInput).foreach { s => trace.append(OutputEvent(s)) }
-    trace
+    trace.toSeq
   }
 }

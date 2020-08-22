@@ -1,8 +1,8 @@
 package imperative.modular
 
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
-class TestLineCountImperative extends WordSpec {
+class TestLineCountImperative extends AnyWordSpec {
 
   /** Creates a (mutable!) SUT instance. */
   def createSUT() = new CountLines with OutputToBuffer[(Int, String)]
