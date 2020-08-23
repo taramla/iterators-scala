@@ -8,7 +8,7 @@ object CumAvgImperative extends App {
     count += 1
     sum += line.toDouble
     val avg = sum / count
-    println(count + ": " + avg)
+    println(s"$count: avg")
     line = scala.io.StdIn.readLine()
   }
 }

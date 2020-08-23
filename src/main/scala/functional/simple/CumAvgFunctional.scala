@@ -1,7 +1,7 @@
 package functional.simple
 
 object CumAvgFunctional extends App {
-  val lines = scala.io.Source.stdin.getLines
+  val lines = scala.io.Source.stdin.getLines()
   // convert each input line to a number
   val values = lines.map(_.toDouble)
   // for each number, produce a count and a cumulative sum
@@ -14,6 +14,6 @@ object CumAvgFunctional extends App {
   }
   // print the results except for the first one
   countsWithAvgs.drop(1).foreach {
-    case (count, avg) => println(count + ": " + avg)
+    case (count, avg) => println(s"$count: $avg")
   }
 }
