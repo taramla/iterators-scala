@@ -8,9 +8,10 @@ An understanding of
 
 - stream processing (finite vs. infinite/unbounded)
 - pipes and filters architecture
-- separation of processing and I/O concerns
-- Iterator design pattern
+- representing streams using the Iterator design pattern
 - immutability
+- separation of processing and I/O concerns
+- testability using the Observer design pattern
 - time/space complexity and scalability
 - performance benchmarking
 
