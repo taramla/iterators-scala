@@ -11,6 +11,6 @@ package object modular {
   def runWithStdIO[Result](run: Task[String, Result]): Unit = {
     val lines = scala.io.Source.stdin.getLines()
     val result = run(lines)
-    result.foreach(println)
+    result.foreach { r => println(r) }
   }
 }

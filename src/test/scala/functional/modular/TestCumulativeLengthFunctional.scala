@@ -12,7 +12,7 @@ class TestCumulativeLengthFunctional extends AnyWordSpec {
       "produce an empty output" in {
         // exercise SUT
         val result: Iterator[(String, Int)] = sut.run(Iterator.empty)
-        // check effect on output observer
+        // check resulting iterator
         assert(result.isEmpty)
       }
     }
@@ -24,9 +24,11 @@ class TestCumulativeLengthFunctional extends AnyWordSpec {
         val expected = data.zip(Seq(5, 10, 14, 16))
         // exercise SUT
         val actual: Iterator[(String, Int)] = sut.run(data.iterator)
-        // check effect on output observer
+        // check resulting iterator
         assert(actual.toSeq === expected)
       }
     }
+
+    // TODO test incremental correctness
   }
 }

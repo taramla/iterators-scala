@@ -5,8 +5,8 @@ object CumulativeLengthFunctional extends App {
 
   val lines = scala.io.Source.stdin.getLines()
 
-  def accumulateCount(acc: (String, Int), line: String): (String, Int) =
-    (line, acc._2 + line.length)
+  def accumulateCount(acc: (String, Int), next: String): (String, Int) =
+    (next, acc._2 + next.length)
 
   val results = lines.scanLeft("dummy", 0)(accumulateCount).drop(1)
 

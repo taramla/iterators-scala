@@ -8,9 +8,11 @@ package imperative.modular
 trait AccumulateLength extends Task[String] with Output[(String, Int)] {
 
   def run(input: Iterator[String]) = {
+    var line = "dummy"
     var length = 0
-    for (line <- input) {
-      length += line.length
+    for (next <- input) {
+      line = next
+      length = length + next.length
       doOutput((line, length))
     }
   }

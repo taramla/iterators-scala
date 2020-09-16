@@ -19,9 +19,7 @@ trait Task[Input] {
  * Provides a reusable main task tied to stdin and stdout.
  * Depends on a suitable run method.
  */
-trait Main[Result] extends Task[String] with OutputToStdOut[Result] {
-  def main(args: Array[String]): Unit = {
-    val lines = scala.io.Source.stdin.getLines()
-    run(lines)
-  }
+trait Main[Result] extends App with Task[String] with OutputToStdOut[Result] {
+  val lines = scala.io.Source.stdin.getLines()
+  run(lines)
 }

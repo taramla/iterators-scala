@@ -12,6 +12,6 @@ package functional.simple
  * https://web.cs.wpi.edu/~kfisler/Pubs/icer14-rainfall/icer14.pdf
  */
 
-object RecurringRainfall extends App {
-
+object RecurringRainfallFunctional extends App {
+  // TODO
 }
