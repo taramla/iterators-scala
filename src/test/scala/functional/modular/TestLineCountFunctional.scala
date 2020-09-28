@@ -20,7 +20,7 @@ class TestLineCountFunctional extends AnyWordSpec {
     "given a nonempty iterator" should {
       "produce the correct nonempty output" in {
         // input data for this test case
-        val data = Seq("hello", "world", "what", "up")
+        val data = Seq("3", "5", "6", "7")
         // exercise SUT
         val result: Iterator[(Int, String)] = sut.run(data.iterator)
         // check effect on output observer
@@ -31,16 +31,16 @@ class TestLineCountFunctional extends AnyWordSpec {
     "given a nonempty iterator" should {
       "exhibit the correct interactive behavior" in {
         // input data for this test case
-        val input = Iterator("hello", "world", "what", "up")
+        val input = Iterator("3", "4", "5", "6")
         // exercise SUT
         val trace = Tracing.runWithTracing(sut.run)(input)
         // check correctness of resulting interactions
         import Tracing.{ InputEvent => i, OutputEvent => o }
         assert(trace === Seq(
-          i("hello"), o((1, "hello")),
-          i("world"), o((2, "world")),
-          i("what"), o((3, "what")),
-          i("up"), o((4, "up"))))
+          i("3"), o((1, "3")),
+          i("4"), o((2, "4")),
+          i("5"), o((3, "5")),
+          i("6"), o((4, "6"))))
       }
     }
   }

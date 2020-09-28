@@ -19,4 +19,6 @@ trait AccumulateLength extends Task[String] with Output[(String, Int)] {
 }
 
 /** A concrete main application object. */
-object CumulativeLengthImperativeModular extends Main[(String, Int)] with AccumulateLength
+object CumulativeLengthImperativeModular extends Main[(String, Int)] with AccumulateLength {
+  override def run(input: Iterator[String], args: Array[String]): Unit = ???
+}

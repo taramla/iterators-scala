@@ -32,5 +32,5 @@ trait Tracing[Input, Result] extends Task[Input] with Output[Result] {
    * `abstract override` lets us override a run method that is still abstract
    * as we are defining this trait but will be available later from a provider such as `CountLines`.
    */
-  abstract override def run(input: Iterator[Input]) = super.run(traced(input))
+  abstract override def run(input: Iterator[Input], args: Array[String]) = super.run(traced(input), args)
 }

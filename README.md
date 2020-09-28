@@ -1,4 +1,5 @@
 # Overview
+ATTEMPTED extra credit: standard deviation 
 
 Examples of using Scala iterators to implement efficient Unix-style filters.
 

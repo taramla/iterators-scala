@@ -5,15 +5,18 @@ import org.scalatest.wordspec.AnyWordSpec
 class TestLineCountImperative extends AnyWordSpec {
 
   /** Creates a (mutable!) SUT instance. */
-  def createSUT() = new CountLines with OutputToBuffer[(Int, String)]
+  def createSUT() = new movingStats with OutputToBuffer[movingStats.Stats] {
+
+  }
 
   "An imperative LineCounter" when {
     "given an empty iterator" should {
       "produce an empty output" in {
+        var args = new Array[String](3)
         // create SUT instance for this test case
         val sut = createSUT()
         // exercise SUT
-        sut.run(Iterator.empty)
+        sut.run(Iterator.empty, args)
         // check effect on output observer
         assert(sut.getResults.isEmpty)
       }
@@ -22,11 +25,12 @@ class TestLineCountImperative extends AnyWordSpec {
     "given a nonempty iterator" should {
       "produce the correct nonempty output" in {
         // input data for this test case
-        val data = Seq("hello", "world", "what", "up")
+        var args = new Array[String](3)
+        val data = Seq("3", "4", "5", "6")
         // create SUT instance for this test case
         val sut = createSUT()
         // exercise SUT
-        sut.run(data.iterator)
+        sut.run(data.iterator, args)
         // check effect on output observer
         assert(sut.getResults === (1 to data.length).zip(data))
       }
@@ -36,18 +40,19 @@ class TestLineCountImperative extends AnyWordSpec {
   "given a nonempty iterator" should {
     "exhibit the correct interactive behavior" in {
       // input data for this test case
-      val input = Iterator("hello", "world", "what", "up")
+      val input = Iterator("3", "4", "5", "6")
+      var args = new Array[String](3)
       // create SUT instance for this test case
-      val sut = new CountLines with Tracing[String, (Int, String)]
+      val sut = new movingStats with Tracing[String, movingStats.Stats]
       // exercise SUT
-      sut.run(input)
+      sut.run(input, args)
       // check correctness of resulting interactions
       import sut.{ InputEvent => i, OutputEvent => o }
       assert(sut.trace === Seq(
-        i("hello"), o((1, "hello")),
-        i("world"), o((2, "world")),
-        i("what"), o((3, "what")),
-        i("up"), o((4, "up"))))
-    }
+        i("3"), o((3.0, 1, Seq(Option("?", "?", "?","?"))),
+        i("2"), o((2.0, 2, Seq(Option("?", "?", "?","?"))),
+        i("5"), o((5.0, 3, Seq(Option("2", "3.3", "5","0.81649658092773"))),
+        i("6"), o((6.0, 4, Seq(Option("2", "4", "6","1.1180339887499"))))
+      }
   }
 }
