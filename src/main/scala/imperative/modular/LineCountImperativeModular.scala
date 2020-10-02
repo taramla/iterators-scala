@@ -11,9 +11,9 @@ import scala.collection.mutable
 object movingStats {
   type Stat = (Double, Double, Double, Double)
   type OptionalStat = Option[Stat]
-  def show(x: movingStats.OptionalStat): Any = x match {
-    case Some(s) => print(s._1 + "," + s._2 + "," + s._3 + "," + s._4)
-    case None => "? ? ? ?"
+  def show(x: movingStats.OptionalStat): String = x match {
+    case Some(s) => s._1 + " " + s._2 + " " + s._3 + " " + s._4
+    case None => " ? ? ? ?"
 
   }
   type Stats = (Double, Int, Seq[OptionalStat])
@@ -21,7 +21,7 @@ object movingStats {
 
 trait movingStats extends Task[String] with Output[movingStats.Stats] {
 
-  override def run(input: Iterator[String], args: Array[String]): Any = {
+  override def run(input: Iterator[String], args: Array[String]): Unit = {
     if (!System.getProperty("os.name").contains("Windows"))
       Signal.handle(new Signal("PIPE"), _ => scala.sys.exit())
 
@@ -55,7 +55,10 @@ trait movingStats extends Task[String] with Output[movingStats.Stats] {
 
   }
 
-  def calculation(queue: mutable.Queue[Double], n: Int) = {
+  def calculation(queue: mutable.Queue[Double], n: Int): Option[(Double, Double, Double, Double)] = {
+    // TODO add logic for window size
+    if (queue.size < n) return None
+
     val queue1 = queue.takeRight(n)
 
     var squaredSum = 0.0
@@ -69,10 +72,24 @@ trait movingStats extends Task[String] with Output[movingStats.Stats] {
     val variance = squaredSum * (1 / sum)
     val stdDev = math.sqrt(variance)
 
-   show(Option(min, avg, max, stdDev))
+   Option(min, avg, max, stdDev)
   }
 }
 
+trait OutputMovingStats extends Output[movingStats.Stats] {
+  override def doOutput(result: movingStats.Stats): Unit = {
+    print(result._1 + " ")
+    print(result._2 + " ")
+    result._3.foreach(s => print(show(s)))
+    println()
+  }
+
+}
+
 /*** A concrete main application object. */
-object movingStatsModular extends Main[movingStats.Stats] with movingStats {
+object movingStatsModular extends movingStats with OutputMovingStats {
+  def main(args: Array[String]): Unit = {
+    val lines = scala.io.Source.stdin.getLines()
+    run(lines, args)
+  }
 }
